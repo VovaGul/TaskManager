@@ -5,4 +5,11 @@ export class Task {
   done?: boolean;
   priority?: number;
   note?: string | undefined;
+
+  constructor(title: string, done: boolean, priority: number, note: string) {
+    this.title = title;
+    this.done = done;
+    this.priority = priority;
+    this.note = note;
+  }
 }

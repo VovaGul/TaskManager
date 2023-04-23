@@ -6,7 +6,8 @@ export class Board {
   colour?: string | undefined;
   items?: Task[];
 
-  constructor(title: string) {
+  constructor(title: string, tasks: Task[]) {
     this.title = title;
+    this.items = tasks;
   }
 }
