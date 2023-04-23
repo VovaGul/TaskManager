@@ -1,1 +1,65 @@
 <p>task-manager works!</p>
+
+<div *ngIf="boards">
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="clearfix">
+        <h2 class="float-start">Lists</h2>
+<!--        <button class="btn btn-default float-end" title="New List..."
+                (click)="showNewListModal(newListModalTemplate)">
+          <i class="bi bi-journal-plus"></i>
+        </button>-->
+      </div>
+      <ul class="list-group">
+        <li *ngFor="let board of boards; index as i" class="list-group-item"
+            [ngClass]="{ 'active': selectedBoard == board }" (click)="selectedBoard = board">
+          <div class="clearfix">
+            <div class="float-start">
+              {{ board.title }}
+            </div>
+<!--            <div class="float-end text-right">
+              <span class="badge badge-light">{{ remainingItems(board) }}</span>
+            </div>-->
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-8" *ngIf="selectedBoard">
+      <div class="clearfix">
+        <h2 class="float-start">{{ selectedBoard.title }}</h2>
+<!--        <button id="listOptions" class="btn btn-default float-end" title="List Options..."
+                (click)="showListOptionsModal(listOptionsModalTemplate)">
+          <i class="bi bi-three-dots-vertical"></i>
+        </button>-->
+      </div>
+      <ul id="todo-items" class="list-group mb-2">
+        <li class="list-group-item" *ngFor="let item of selectedBoard.items; index as i">
+          <div class="d-flex">
+<!--            <div class="todo-item-checkbox">
+              <input type="checkbox" [(ngModel)]="item.done" (change)="updateItem(item)" />
+            </div>-->
+            <div class="flex-fill">
+              <!--<input id="{{ 'itemTitle' + i }}" *ngIf="item == selectedBoard" type="text"
+                     class="form-control item-input-control" [(ngModel)]="item.title" (keyup.enter)="updateItem(item, true)"
+                     (blur)="updateItem(item)" autofocus="autofocus" />-->
+   <!--           <div class="todo-item-title" *ngIf="item != selectedBoard" [ngClass]="{ 'done-todo': item.done }"
+                   (click)="editItem(item, 'itemTitle' + i)" class="form-control item-input-control">
+                <span>{{ item.title }}</span>
+              </div>-->
+            </div>
+            <div class="todo-item-commands">
+         <!--     <button *ngIf="item.id != 0" (click)="showItemDetailsModal(itemDetailsModalTemplate, item)"
+                      class="btn btn-default btn-xs" role="button">
+                <i class="bi bi-three-dots-vertical"></i>
+              </button>-->
+            </div>
+          </div>
+        </li>
+    <!--    <li class="list-group-item" (click)="addItem()">
+          <button class="btn btn-default">Add Item...</button>
+        </li>-->
+      </ul>
+    </div>
+  </div>
+</div>
