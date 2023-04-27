@@ -1,33 +1,24 @@
 <p>task-manager works!</p>
 
-<div *ngIf="boards">
+<div *ngIf="boards" class="example-container">
 
   <div class="row">
     <div class="col-sm-4">
       <div class="clearfix">
-        <h2 class="float-start">Lists</h2>
+        <h2 class="float-start">Доски</h2>
       </div>
       <ul class="list-group list-group-horizontal">
         <li *ngFor="let board of boards; index as i" class="list-group-item">
-          <div class="clearfix">
-            <div class="float-start">
-              {{ board.title }}
+          <div class="clearfix example-container">
+            <h2>{{ board.title }}</h2>
 
-              <ul id="todo-items" class="list-group mb-2">
-                <li class="list-group-item" *ngFor="let item of board.items; index as i">
-                  <div class="d-flex">
-                    <div class="flex-fill">
-                      <div class="todo-item-title" [ngClass]="{ 'done-todo': item.done }"
-                           class="form-control item-input-control">
-                        <span>{{ item.title }}</span>
-                      </div>
-                    </div>
-                    <div class="todo-item-commands">
-                    </div>
-                  </div>
-                </li>
-              </ul>
-
+            <div
+              cdkDropList
+              #todoList="cdkDropList"
+              [cdkDropListData]="board.items"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let item of board.items" cdkDrag>{{ item.title }}</div>
             </div>
           </div>
         </li>

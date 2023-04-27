@@ -13,11 +13,12 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { TodoComponent } from './todo/todo.component';
 import { TokenComponent } from './token/token.component';
+import { TaskManagerComponent } from './task-manager/task-manager.component';
 
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TaskManagerComponent } from './task-manager/task-manager.component';
+import { DragDropModule } from "@angular/cdk/drag-drop";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { TaskManagerComponent } from './task-manager/task-manager.component';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    DragDropModule,
     ApiAuthorizationModule,
     AppRoutingModule,
     BrowserAnimationsModule,

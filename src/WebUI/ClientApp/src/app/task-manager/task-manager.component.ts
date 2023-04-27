@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Board} from "./Board";
 import {Task} from "./Task";
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-task-manager',
@@ -30,4 +31,16 @@ export class TaskManagerComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  drop(event: CdkDragDrop<Task[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
+  }
 }
