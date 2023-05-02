@@ -43,4 +43,17 @@ export class TaskManagerComponent implements OnInit {
       );
     }
   }
+
+  dropBoard(event: CdkDragDrop<Board[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
+  }
 }

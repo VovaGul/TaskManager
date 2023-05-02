@@ -7,22 +7,24 @@
       <div class="clearfix">
         <h2 class="float-start">Доски</h2>
       </div>
-      <ul class="list-group list-group-horizontal">
-        <li *ngFor="let board of boards; index as i" class="list-group-item">
-          <div class="clearfix example-container">
-            <h2>{{ board.title }}</h2>
+      <div
+        cdkDropList
+        cdkDropListOrientation="horizontal"
+        [cdkDropListData]="boards"
+        class="example-horizontal-list"
+        (cdkDropListDropped)="dropBoard($event)">
+        <div class="example-box" *ngFor="let board of boards" cdkDrag>
+          <h2>{{ board.title }}</h2>
 
-            <div
-              cdkDropList
-              #todoList="cdkDropList"
-              [cdkDropListData]="board.items"
-              class="example-list"
-              (cdkDropListDropped)="drop($event)">
-              <div class="example-box" *ngFor="let item of board.items" cdkDrag>{{ item.title }}</div>
-            </div>
+          <div
+            cdkDropList
+            class="example-vertical-list"
+            [cdkDropListData]="board.items"
+            (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let item of board.items" cdkDrag>{{ item.title }}</div>
           </div>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>
