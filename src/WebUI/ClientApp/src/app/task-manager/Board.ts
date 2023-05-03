@@ -4,10 +4,11 @@ export class Board {
   id?: number;
   title?: string | undefined;
   colour?: string | undefined;
-  items?: Task[];
+  tasks?: Task[];
 
-  constructor(title: string, tasks: Task[]) {
+  constructor(id: number, title: string, tasks: Task[]) {
+    this.id = id;
     this.title = title;
-    this.items = tasks;
+    this.tasks = tasks;
   }
 }

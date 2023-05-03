@@ -19,9 +19,11 @@
           <div
             cdkDropList
             class="example-vertical-list"
-            [cdkDropListData]="board.items"
+            id="{{board.id}}"
+            [cdkDropListConnectedTo]="['1', '2', '3']"
+            [cdkDropListData]="board.tasks"
             (cdkDropListDropped)="drop($event)">
-            <div class="example-box" *ngFor="let item of board.items" cdkDrag>{{ item.title }}</div>
+            <div class="example-box" *ngFor="let task of board.tasks" cdkDrag>{{ task.title }}</div>
           </div>
         </div>
       </div>

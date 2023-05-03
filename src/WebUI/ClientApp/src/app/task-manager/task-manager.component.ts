@@ -10,17 +10,17 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 })
 export class TaskManagerComponent implements OnInit {
   boards: Board[] = [
-    new Board("Беклог", [
+    new Board(1,"Беклог", [
       new Task("Сделать важное", false,1, "ололол олол"),
       new Task("Сделать важное", false,2, "ололол олол"),
       new Task("Сделать важное", false,3, "ололол олол"),
       new Task("Сделать важное", false,4, "ололол олол")]),
-    new Board("В процессе", [
+    new Board(2, "В процессе", [
       new Task("Сделать важное", false,5, "ололол олол"),
       new Task("Сделать важное", false,6, "ололол олол"),
       new Task("Сделать важное", false,7, "ололол олол"),
       new Task("Сделать важное", false,8, "ололол олол")]),
-    new Board("Завершено", [
+    new Board(3, "Завершено", [
       new Task("Сделать важное", false,9, "ололол олол"),
       new Task("Сделать важное", false,10, "ололол олол"),
       new Task("Сделать важное", false,11, "ололол олол"),
