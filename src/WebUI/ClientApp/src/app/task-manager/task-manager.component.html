@@ -3,32 +3,30 @@
 <div *ngIf="boards">
 
   <div class="row">
-    <div class="col-sm-4">
-      <div class="clearfix">
-        <h2 class="float-start">Доски</h2>
-        <button class="btn btn-default float-end" title="New List..."
-                (click)="showNewBoardModal(newBoardModalTemplate)">
-          <i class="bi bi-journal-plus"></i>
-        </button>
-      </div>
-      <div
-        cdkDropList
-        cdkDropListOrientation="horizontal"
-        [cdkDropListData]="boards"
-        class="example-horizontal-list"
-        (cdkDropListDropped)="dropBoard($event)">
-        <div class="example-container" *ngFor="let board of boards" cdkDrag>
-          <h2>{{ board.title }}</h2>
+    <div class="clearfix">
+      <h2 class="float-start">Доски</h2>
+      <button class="btn btn-default float-end" title="New List..."
+              (click)="showNewBoardModal(newBoardModalTemplate)">
+        <i class="bi bi-journal-plus"></i>
+      </button>
+    </div>
+    <div
+      cdkDropList
+      cdkDropListOrientation="horizontal"
+      [cdkDropListData]="boards"
+      class="example-horizontal-list"
+      (cdkDropListDropped)="dropBoard($event)">
+      <div class="example-container" *ngFor="let board of boards" cdkDrag>
+        <h2>{{ board.title }}</h2>
 
-          <div
-            cdkDropList
-            class="example-vertical-list"
-            id="{{board.id}}"
-            [cdkDropListConnectedTo]="['1', '2', '3']"
-            [cdkDropListData]="board.tasks"
-            (cdkDropListDropped)="drop($event)">
-            <div class="example-box" *ngFor="let task of board.tasks" cdkDrag>{{ task.title }}</div>
-          </div>
+        <div
+          cdkDropList
+          class="example-vertical-list"
+          id="{{board.id}}"
+          [cdkDropListConnectedTo]="['1', '2', '3']"
+          [cdkDropListData]="board.tasks"
+          (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let task of board.tasks" cdkDrag>{{ task.title }}</div>
         </div>
       </div>
     </div>
