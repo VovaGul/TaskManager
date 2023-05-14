@@ -29,7 +29,7 @@ export class TaskManagerComponent implements OnInit {
       new Task("Сделать важное", false,12, "ололол олол")])];
   selectedBoard: Board;
   newListModalRef: BsModalRef;
-  newListEditor: any = {};
+  newBoardEditor: any = {};
   constructor(
     private modalService: BsModalService
   ) { }
@@ -63,27 +63,27 @@ export class TaskManagerComponent implements OnInit {
     }
   }
 
-  showNewListModal(template: TemplateRef<any>): void {
+  showNewBoardModal(template: TemplateRef<any>): void {
     this.newListModalRef = this.modalService.show(template);
     setTimeout(() => document.getElementById('title').focus(), 250);
   }
 
-  newListCancelled(): void {
+  newBoardCancelled(): void {
     this.newListModalRef.hide();
-    this.newListEditor = {};
+    this.newBoardEditor = {};
   }
 
-  addList(): void {
+  addBoard(): void {
     const list = {
       id: this.getRandomArbitrary(0, 1000000000),
-      title: this.newListEditor.title,
+      title: this.newBoardEditor.title,
       items: []
     } as Board;
 
     this.boards.push(list);
     this.selectedBoard = list;
     this.newListModalRef.hide();
-    this.newListEditor = {};
+    this.newBoardEditor = {};
   }
 
   /**
