@@ -6,6 +6,10 @@
     <div class="col-sm-4">
       <div class="clearfix">
         <h2 class="float-start">Доски</h2>
+        <button class="btn btn-default float-end" title="New List..."
+                (click)="showNewListModal(newListModalTemplate)">
+          <i class="bi bi-journal-plus"></i>
+        </button>
       </div>
       <div
         cdkDropList
@@ -30,3 +34,31 @@
     </div>
   </div>
 </div>
+
+<ng-template #newListModalTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">New List</h4>
+    <button type="button" class="close btn-close pull-right" aria-label="Close" (click)="newListCancelled()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="title" placeholder="List title..." [(ngModel)]="newListEditor.title"
+             [ngClass]="{ 'is-invalid': newListEditor.error }" (keyup.enter)="addList()" />
+      <div *ngIf="newListEditor.error" class="invalid-feedback">
+        {{ newListEditor.error }}
+      </div>
+    </div>
+    <div>
+      <pre>{{ newListEditor | json }}</pre>
+    </div>
+  </div>
+  <div class="modal-footer clearfix">
+    <div class="float-end">
+      <button class="btn btn-default" (click)="newListCancelled()">Cancel</button>
+      <button class="btn btn-primary" (click)="addList()">Create</button>
+    </div>
+  </div>
+</ng-template>

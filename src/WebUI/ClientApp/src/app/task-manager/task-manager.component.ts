@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {Board} from "./Board";
 import {Task} from "./Task";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
+import {CreateTodoListCommand, TodoListDto} from "../web-api-client";
 
 @Component({
   selector: 'app-task-manager',
@@ -26,7 +28,11 @@ export class TaskManagerComponent implements OnInit {
       new Task("Сделать важное", false,11, "ололол олол"),
       new Task("Сделать важное", false,12, "ололол олол")])];
   selectedBoard: Board;
-  constructor() { }
+  newListModalRef: BsModalRef;
+  newListEditor: any = {};
+  constructor(
+    private modalService: BsModalService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -55,5 +61,48 @@ export class TaskManagerComponent implements OnInit {
         event.currentIndex,
       );
     }
+  }
+
+  showNewListModal(template: TemplateRef<any>): void {
+    this.newListModalRef = this.modalService.show(template);
+    setTimeout(() => document.getElementById('title').focus(), 250);
+  }
+
+  newListCancelled(): void {
+    this.newListModalRef.hide();
+    this.newListEditor = {};
+  }
+
+  addList(): void {
+    const list = {
+      id: this.getRandomArbitrary(0, 1000000000),
+      title: this.newListEditor.title,
+      items: []
+    } as Board;
+
+    this.boards.push(list);
+    this.selectedBoard = list;
+    this.newListModalRef.hide();
+    this.newListEditor = {};
+  }
+
+  /**
+   * Returns a random number between min (inclusive) and max (exclusive)
+   */
+  getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  /**
+   * Returns a random integer between min (inclusive) and max (inclusive).
+   * The value is no lower than min (or the next integer greater than min
+   * if min isn't an integer) and no greater than max (or the next integer
+   * lower than max if max isn't an integer).
+   * Using Math.round() will give you a non-uniform distribution!
+   */
+  getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }
