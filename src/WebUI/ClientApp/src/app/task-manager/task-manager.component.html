@@ -1,6 +1,6 @@
 <p>task-manager works!</p>
 
-<div *ngIf="boards" class="example-container">
+<div *ngIf="boards">
 
   <div class="row">
     <div class="col-sm-4">
@@ -13,7 +13,7 @@
         [cdkDropListData]="boards"
         class="example-horizontal-list"
         (cdkDropListDropped)="dropBoard($event)">
-        <div class="example-box" *ngFor="let board of boards" cdkDrag>
+        <div class="example-container" *ngFor="let board of boards" cdkDrag>
           <h2>{{ board.title }}</h2>
 
           <div
