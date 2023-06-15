@@ -1,7 +1,7 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
 import {Board} from "./Board";
 import {Task} from "./Task";
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {CdkDragDrop, CdkDrag, CdkDropList, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
 import {CreateTodoListCommand, TodoListDto} from "../web-api-client";
 
@@ -27,25 +27,50 @@ export class TaskManagerComponent implements OnInit {
       new Task("Сделать важное", false,10, "ололол олол"),
       new Task("Сделать важное", false,11, "ололол олол"),
       new Task("Сделать важное", false,12, "ололол олол")])];
+
+  boardConnects:  { [name: number]: string[] }
   selectedBoard: Board;
   newListModalRef: BsModalRef;
   newBoardEditor: any = {};
   constructor(
     private modalService: BsModalService
-  ) { }
+  ) {
+    this.setBoardConnect()
+  }
 
   ngOnInit(): void {
   }
 
+  canDrop(item: CdkDrag, list: CdkDropList) {
+    return true;
+  }
+
+  setBoardConnect(): void {
+    this.boardConnects = {}
+
+    let ids = []
+    for (let board of this.boards) {
+      ids.push(board.id)
+    }
+
+    for (let board of this.boards) {
+      this.boardConnects[board.id] = ids
+    }
+  }
+
   drop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
     } else {
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex,
+        event.currentIndex
       );
     }
   }
@@ -75,7 +100,7 @@ export class TaskManagerComponent implements OnInit {
 
   addBoard(): void {
     const list = {
-      id: this.getRandomArbitrary(0, 1000000000),
+      id: this.getRandomArbitrary(4, 1000),
       title: this.newBoardEditor.title,
       items: []
     } as Board;
